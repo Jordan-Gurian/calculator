@@ -5,7 +5,23 @@ let operatorArray = ['+', '-', 'x', '÷'];
 
 let display = document.querySelector('.display');
 let numberButton = Array.from(document.querySelectorAll('.number, .operator'));
-let equalButton = document.querySelector('#equals')
+let equalButton = document.querySelector('#equals');
+let clearButton = document.querySelector('#clear');
+let signButton = document.querySelector('#sign');
+
+signButton.addEventListener('click', function() {
+    if (display.textContent[0] === '-') {
+        display.textContent = display.textContent.substring(1);
+    }
+    else {
+        display.textContent = '-' + display.textContent;
+    }
+})
+
+clearButton.addEventListener('click', function() {
+    display.textContent = '';
+});
+
 
 equalButton.addEventListener('click', function() {
     setNums(display.textContent);
