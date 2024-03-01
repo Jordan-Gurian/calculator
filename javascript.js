@@ -2,6 +2,16 @@ let firstNum = 0;
 let secondNum = 0;
 let operator = '';
 
+let display = document.querySelector('.display');
+let numberButton = Array.from(document.querySelectorAll('.number'));
+
+numberButton.forEach(numToDisplay);
+
+function numToDisplay(item) {
+    item.addEventListener('click', function() {
+        display.textContent += item.textContent;
+    });
+}
 
 function addTwoNums(num1, num2) {
     return num1 + num2
