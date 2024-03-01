@@ -8,6 +8,19 @@ let numberButton = Array.from(document.querySelectorAll('.number, .operator'));
 let equalButton = document.querySelector('#equals');
 let clearButton = document.querySelector('#clear');
 let signButton = document.querySelector('#sign');
+let decimalButton = document.querySelector('#decimal');
+let operatorButton = Array.from(document.querySelectorAll('.operator'));
+
+
+decimalButton.addEventListener('click', function() {
+    if (display.textContent.includes('.')) {
+        return
+    }
+    else {
+        display.textContent += decimalButton.textContent;
+    }
+    return
+});
 
 signButton.addEventListener('click', function() {
     if (display.textContent[0] === '-') {
@@ -24,29 +37,41 @@ clearButton.addEventListener('click', function() {
 
 
 equalButton.addEventListener('click', function() {
-    setNums(display.textContent);
-    display.textContent = operate(firstNum, secondNum, operator);
+    secondNum = Number(display.textContent);
+    let res = operate(firstNum, secondNum, operator);
+    let strSplit = getDecimals(String(res));
+    if (strSplit[1]) {
+        display.textContent = Number(strSplit[0]) + Number(Number('.' + strSplit[1]).toFixed(2));
+    }
+    else {
+        display.textContent = res
+    }
     return
 })
 
-numberButton.forEach(numToDisplay);
 
-function setNums(str) {
-    let operatorInd = str.indexOf(operator);
-    firstNum = Number(str.substring(0, operatorInd));
-    secondNum = Number(str.substring(operatorInd+1, str.length));
-    return firstNum, secondNum
-}
+numberButton.forEach(numToDisplay);
 
 function numToDisplay(item) {
     item.addEventListener('click', function() {
-        display.textContent += item.textContent;
-        if (operatorArray.some((operand) => operand === item.textContent)) {
+        if (display.textContent === '0') {
+            display.textContent = item.textContent;
+        }
+        else if (operatorArray.some((operand) => operand === item.textContent)) {
             operator = item.textContent;
+            firstNum = Number(display.textContent);
+            display.textContent = ''
+        }
+        else {
+            display.textContent += item.textContent;
         }
     });
     return
 }
+
+function getDecimals(str) {
+    return str.split('.');
+};
 
 function addTwoNums(num1, num2) {
     return num1 + num2
