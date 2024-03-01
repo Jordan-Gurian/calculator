@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 64px;
+}
+
+button,
+.display {
+    padding: 12px;
+    margin: 4px;
+    width: 64px;
+    height: 64px;
+    font-size: 16px;
+}
+
+#clear {
+    width: 210px;
+}
+
+.top,
+.second,
+.third,
+.fourth,
+.bottom {
+    display: flex;
+}
+
+.display {
+    border: 2px solid black;
+    width: 254px;
+    font-size: 32px;
+}
